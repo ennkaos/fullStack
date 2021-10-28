@@ -1,0 +1,33 @@
+{
+  "posts": [
+    {
+      "email": "typicode",
+    "password": "something",
+    "firstName": "Alex",
+    "lastName": "Bucur",
+    "createdAt": "20/01/2020",
+    "administrator": true
+    }
+    
+    
+  ],
+  "comments": [
+    {
+      "email": "typicode",
+    "password": "something",
+    "firstName": "Alex",
+    "lastName": "Bucur",
+    "createdAt": "20/01/2020",
+    "administrator": true
+    }
+    
+  ],
+  "profile": {
+    "email": "typicode",
+    "password": "something",
+    "firstName": "Alex",
+    "lastName": "Bucur",
+    "createdAt": "20/01/2020",
+    "administrator": true
+  }
+}
