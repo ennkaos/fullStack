@@ -1,0 +1,88 @@
+<nav class="navbar navbar-light bg-primary fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Medo Clinic</a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasNavbar"
+      aria-controls="offcanvasNavbar"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="offcanvas offcanvas-end"
+      tabindex="-1"
+      id="offcanvasNavbar"
+      aria-labelledby="offcanvasNavbarLabel"
+    >
+      <div class="offcanvas-header bg-primary text-dark">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Medo Clinic</h5>
+        <button
+          type="button"
+          class="btn-close text-reset"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="offcanvas-body bg-primary text-dark">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item" *ngIf="!result">
+            <p>
+              You {{ isLoggedIn ? "" : "don't" }} have an account ? Please
+              {{ isLoggedIn ? "Login " : "Register" }}
+            </p>
+          </li>
+          <h4 *ngIf="result">Welcome {{ name }}</h4>
+          <li class="nav-item" *ngIf="result">
+            <button
+              class="btn btn-secondary"
+              aria-current="page"
+              class="btn btn-success"
+              (click)="onLogOut()"
+            >
+              Log Out
+            </button>
+          </li>
+          <li *ngIf="!result" class="nav-item">
+            <button
+              class="nav-link active"
+              aria-current="page"
+              class="btn btn-success"
+              routerLink="/register"
+              (click)="Register()"
+            >
+              {{ isLoggedIn ? "Login" : "Register" }}
+            </button>
+          </li>
+          <ul
+            *ngIf="result"
+            class="navbar-nav justify-content-end flex-grow-1 pe-3 mt-5"
+          >
+            <li *ngIf="isAdmin" class="nav-item hover">
+              <a class="nav-link" routerLink="/doctors">Doctors </a>
+            </li>
+            <li
+              *ngIf="accType === 'doctor' || accType === 'admin'"
+              class="nav-item hover"
+            >
+              <a class="nav-link" routerLink="/patience">Patience</a>
+            </li>
+            <li *ngIf="isAdmin" class="nav-item hover">
+              <a
+                class="nav-link"
+                routerLink="/admin-login"
+                routerLink="/admin-login"
+                >Create admin Account</a
+              >
+            </li>
+            <li class="nav-item hover">
+              <a class="nav-link" routerLink="/appuntamento">Apuntamenti</a>
+            </li>
+          </ul>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

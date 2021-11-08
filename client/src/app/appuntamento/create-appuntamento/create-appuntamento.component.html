@@ -1,0 +1,131 @@
+<div class="row">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-group">
+    <h2>Please Create an Appuntamento Here</h2>
+    <p>Please Insert all your Informations</p>
+    <button (click)="openInfo()" class="btn bg-primary text-light">
+      <i *ngIf="!isOpen" class="bi bi-arrow-down-circle-fill"></i>
+      <i *ngIf="isOpen" class="bi bi-arrow-up-circle-fill"></i>
+    </button>
+    <p *ngIf="!isOpen">See Your informations...</p>
+    <p *ngIf="isOpen">Close Your informations...</p>
+
+    <div *ngIf="isOpen" class="mb-1 row">
+      <label for="staticEmail" class="col-sm-6 col-form-label">Name</label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="{{ name }}"
+        readonly
+      />
+    </div>
+    <div *ngIf="isOpen" class="mb-1 row">
+      <label for="staticEmail" class="col-sm-6 col-form-label">Name</label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="{{ email }}"
+        readonly
+      />
+    </div>
+    <div *ngIf="isOpen" class="mb-1 row">
+      <label for="staticEmail" class="col-sm-6 col-form-label">Name</label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="{{ firstName }}"
+        readonly
+      />
+    </div>
+    <div *ngIf="isOpen" class="mb-1 row">
+      <label for="staticEmail" class="col-sm-6 col-form-label">Name</label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="{{ lastName }}"
+        readonly
+      />
+    </div>
+    <div class="mb-1 row">
+      <label for="date" class="col-sm-6 col-form-label">Date</label>
+      <div class="col-sm-12">
+        <input
+          placeholder="date"
+          type="date"
+          class="form-control bg-primary text-light"
+          formControlName="date"
+          id="date"
+          [class.is-invalid]="
+            form.get('date')?.invalid && form.get('date')?.touched
+          "
+        />
+        <div class="invalid-feedback">
+          <p *ngIf="form.get('date')?.errors?.required">The Date is required</p>
+        </div>
+      </div>
+    </div>
+    <div class="mb-1 row">
+      <label for="doctorsName " class="col-sm-6 col-form-label"
+        >Select Doctor..</label
+      >
+      <div class="col-sm-12">
+        <select
+          class="form-select bg-primary text-light"
+          aria-label="Select Doctor"
+          formControlName="doctorName"
+          id="doctor"
+          [class.is-invalid]="
+            form.get('doctor')?.invalid && form.get('doctor')?.touched
+          "
+        >
+          <option selected>Select Doctors from Here</option>
+          <option *ngFor="let doctor of filteredAcc" value="{{ doctor.email }}">
+            {{ doctor.firstName + " " + doctor.lastName }}
+          </option>
+        </select>
+        <div class="invalid-feedback">
+          <p *ngIf="form.get('doctorName')?.errors?.required">
+            A doctor must be selected
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-1 row">
+      <label for="firstName " class="col-sm-6 col-form-label">Department</label>
+      <div class="col-sm-12">
+        <select
+          placeholder="Department"
+          type="text"
+          formControlName="department"
+          class="form-control bg-primary text-light"
+          id="department"
+          [class.is-invalid]="
+            form.get('department')?.invalid && form.get('department')?.touched
+          "
+        >
+          <option selected>Select Doctors from Here</option>
+          <option value="Oncology">Oncology</option>
+          <option value="Bacteriology ">Bacteriology</option>
+          <option value="Cardiology">Cardiology</option>
+          <option value="General Surgery">General Surgery</option>
+          <option value="Urology">Urology</option>
+          <option value="Psycho Terapy">Psycho Terapy</option>
+        </select>
+        <div class="invalid-feedback">
+          <p *ngIf="form.get('department')?.errors?.required">
+            The Department is required
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <button [disabled]="form.errors?.invalid" class="btn btn-success mb-3 mt-3">
+      Make Appointment
+    </button>
+  </form>
+  <div class="row">
+    <p>{{ "Form Dirty " + form.dirty }}</p>
+    <p>{{ "Form Invalid " + form.invalid }}</p>
+    <p>{{ "Form Touched " + form.touched }}</p>
+  </div>
+</div>
