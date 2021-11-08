@@ -1,0 +1,144 @@
+<div class="col d-flex mb-5">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-group">
+    <h2>Register Form</h2>
+    <p>Please Insert all your Informations</p>
+    <div class="mb-1 row">
+      <label for="staticEmail" class="col-sm-6 col-form-label">Email</label>
+      <div class="col-sm-12">
+        <input
+          placeholder="email"
+          type="email"
+          class="form-control bg-primary text-light"
+          formControlName="email"
+          id="staticEmail"
+          [class.is-invalid]="
+            form.get('email')?.invalid && form.get('email')?.touched
+          "
+        />
+        <div class="invalid-feedback">
+          <p *ngIf="form.get('email')?.errors?.required">
+            The email or username is required
+          </p>
+          <p *ngIf="form.get('email')?.errors?.email">
+            You must introduce a format of email
+          </p>
+
+          <p *ngIf="form.get('email')?.errors?.minlength">
+            The email or username must be at least 4 characters
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="mb-1 row">
+      <label for="verifyEmail " class="col-sm-6 col-form-label"
+        >Verify Email</label
+      >
+      <div class="col-sm-12">
+        <input
+          placeholder="Verify Email"
+          type="email"
+          formControlName="verifyEmail"
+          class="form-control bg-primary text-light"
+          id="verifyEmail"
+          [class.is-invalid]="
+            form.get('verifyEmail')?.invalid && form.get('verifyEmail')?.touched
+          "
+        />
+        <div class="invalid-feedback">
+          <p *ngIf="form.get('verifyEmail')?.errors?.required">
+            The email or username is required
+          </p>
+          <p *ngIf="form.get('verifyEmail')?.errors?.email">
+            You must introduce a format of email
+          </p>
+
+          <p *ngIf="form.get('verifyEmail')?.errors?.minlength">
+            The email or username must be at least 4 characters
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-1 row">
+      <label for="inputPassword " class="col-sm-6 col-form-label"
+        >Password</label
+      >
+      <div class="col-sm-12">
+        <input
+          placeholder="password"
+          type="password"
+          formControlName="password"
+          class="form-control bg-primary text-light"
+          id="inputPassword"
+          [class.is-invalid]="
+            form.get('password')?.invalid && form.get('password')?.touched
+          "
+        />
+        <div class="invalid-feedback">
+          <p *ngIf="form.get('password')?.errors?.required">
+            The password is required
+          </p>
+          <p *ngIf="form.get('password')?.errors?.minlength">
+            The password is required to have at least 4 characters
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="mb-1 row">
+      <label for="firstName " class="col-sm-6 col-form-label">First Name</label>
+      <div class="col-sm-12">
+        <input
+          placeholder="First Name"
+          type="text"
+          formControlName="firstName"
+          class="form-control bg-primary text-light"
+          id="firstName"
+          [class.is-invalid]="
+            form.get('firstName')?.invalid && form.get('firstName')?.touched
+          "
+        />
+        <div class="invalid-feedback">
+          <p *ngIf="form.get('firstName')?.errors?.required">
+            The First Name is required
+          </p>
+
+          <p *ngIf="form.get('firstName')?.errors?.minlength">
+            The First Name must be at least 4 characters
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="mb-3 row d-flex flex-row">
+      <label for="lastName " class="col-sm-6 col-form-label">Last Name</label>
+
+      <div class="col-sm-12">
+        <input
+          placeholder="Last Name"
+          type="text"
+          formControlName="lastName"
+          class="form-control bg-primary text-light"
+          id="lastName"
+          [class.is-invalid]="
+            form.get('lastName')?.invalid && form.get('lastName')?.touched
+          "
+        />
+        <div class="invalid-feedback">
+          <p *ngIf="form.get('lastName')?.errors?.required">
+            The First Name is required
+          </p>
+
+          <p *ngIf="form.get('lastName')?.errors?.minlength">
+            The First Name must be at least 4 characters
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+      <div class="col">
+        <button [disabled]="form.invalid" class="btn btn-success">
+          Sign In
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

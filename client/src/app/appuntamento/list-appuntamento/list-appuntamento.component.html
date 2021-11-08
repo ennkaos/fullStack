@@ -1,0 +1,196 @@
+<div class="row" [ngClass]="appuntamenti ? 'nothing' : ''">
+  <div *ngIf="!appuntamenti" class="spinner-border" role="status">
+    <span class="sr-only"></span>
+  </div>
+  <div class="row"></div>
+</div>
+<div *ngIf="typeofAcc === 'doctor'" class="col-sm-6">
+  <div class="input-group input-group-sm">
+    <div class="input-group-prepend">
+      <span class="input-group-text bg-primary" id="inputGroup-sizing-lg"
+        >Search</span
+      >
+    </div>
+    <input
+      [(ngModel)]="listFilter"
+      type="text"
+      class="form-control"
+      aria-label="large"
+      aria-describedby="inputGroup-sizing-sm"
+    />
+  </div>
+  <div *ngIf="typeofAcc === 'doctor'" class="input-group mb-3 mt-3">
+    <div class="input-group-prepend">
+      <label class="input-group-text bg-primary" for="inputGroupSelect01"
+        >Options</label
+      >
+    </div>
+    <select
+      [(ngModel)]="typeofSearch"
+      class="custom-select"
+      id="inputGroupSelect01"
+    >
+      <option [defaultSelected] value="name">Name</option>
+      <option value="email">Email</option>
+      <option value="doctorName">Doctor Name</option>
+      <option value="department">Department Name</option>
+    </select>
+  </div>
+</div>
+<div *ngIf="appuntamenti" class="row">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">
+          <p>User</p>
+
+          <p>
+            <span (click)="getOrder(true, 'user')"
+              ><i class="bi bi-arrow-down-circle touched"></i
+            ></span>
+            <span (click)="getOrder(false, 'user')"
+              ><i class="bi bi-arrow-up-circle touched"></i
+            ></span>
+          </p>
+        </th>
+        <th scope="col">
+          <p>Email</p>
+
+          <p>
+            <span (click)="getOrder(true, 'email')"
+              ><i class="bi bi-arrow-down-circle touched"></i
+            ></span>
+            <span (click)="getOrder(false, 'email')"
+              ><i class="bi bi-arrow-up-circle touched"></i
+            ></span>
+          </p>
+        </th>
+        <th scope="col">
+          <p>First Name</p>
+          <p>
+            <span (click)="getOrder(true, 'fName')"
+              ><i class="bi bi-arrow-down-circle touched"></i
+            ></span>
+            <span (click)="getOrder(false, 'fName')"
+              ><i class="bi bi-arrow-up-circle touched"></i
+            ></span>
+          </p>
+        </th>
+        <th scope="col">
+          <p>Last Name</p>
+          <p>
+            <span (click)="getOrder(true, 'lName')"
+              ><i class="bi bi-arrow-down-circle touched"></i
+            ></span>
+            <span (click)="getOrder(false, 'lName')"
+              ><i class="bi bi-arrow-up-circle touched"></i
+            ></span>
+          </p>
+        </th>
+        <th scope="col">
+          <p>Created At</p>
+          <p>
+            <span (click)="getOrder(true, 'createdAt')"
+              ><i class="bi bi-arrow-down-circle touched"></i
+            ></span>
+            <span (click)="getOrder(false, 'createdAt')"
+              ><i class="bi bi-arrow-up-circle touched"></i
+            ></span>
+          </p>
+        </th>
+        <th scope="col">
+          <p>Date</p>
+          <p>
+            <span (click)="getOrder(true, 'date')"
+              ><i class="bi bi-arrow-down-circle touched"></i
+            ></span>
+            <span (click)="getOrder(false, 'date')"
+              ><i class="bi bi-arrow-up-circle touched"></i
+            ></span>
+          </p>
+        </th>
+        <th scope="col">Solved</th>
+        <th scope="col">
+          <p>Doctor Name</p>
+          <p>
+            <span (click)="getOrder(true, 'dName')"
+              ><i class="bi bi-arrow-down-circle touched"></i
+            ></span>
+            <span (click)="getOrder(false, 'dName')"
+              ><i class="bi bi-arrow-up-circle touched"></i
+            ></span>
+          </p>
+        </th>
+        <th scope="col">
+          <p>Department</p>
+          <p>
+            <span (click)="getOrder(true, 'department')"
+              ><i class="bi bi-arrow-down-circle touched"></i
+            ></span>
+            <span (click)="getOrder(false, 'department')"
+              ><i class="bi bi-arrow-up-circle touched"></i
+            ></span>
+          </p>
+        </th>
+        <th *ngIf="typeofAcc === 'doctor'" scope="col">
+          <p>Solve</p>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="bg-primary" *ngFor="let item of today">
+        <th scope="row">{{ item.id }}</th>
+        <td>{{ item.name }}</td>
+        <td>{{ item.email }}</td>
+        <td>{{ item.firstName }}</td>
+        <td>{{ item.lastName }}</td>
+        <td>{{ item.createdAt | date }}</td>
+        <td>{{ item.date | date }}</td>
+        <td>
+          <i
+            *ngIf="!item.solved"
+            class="bi bi-slash-circle-fill text-danger"
+          ></i>
+          <i
+            *ngIf="item.solved"
+            class="bi bi-check-circle-fill text-success"
+          ></i>
+        </td>
+        <td>{{ item.doctorName }}</td>
+        <td>{{ item.department }}</td>
+        <td *ngIf="typeofAcc === 'doctor'">
+          <button (click)="solveItem(item)" class="btn-success m-1">
+            Solve
+          </button>
+        </td>
+      </tr>
+      <tr class="bg-info" *ngFor="let item of filteredAppuntamenti">
+        <th scope="row">{{ item.id }}</th>
+        <td>{{ item.name }}</td>
+        <td>{{ item.email }}</td>
+        <td>{{ item.firstName }}</td>
+        <td>{{ item.lastName }}</td>
+        <td>{{ item.createdAt | date }}</td>
+        <td>{{ item.date | date }}</td>
+        <td>
+          <i
+            *ngIf="!item.solved"
+            class="bi bi-slash-circle-fill text-danger"
+          ></i>
+          <i
+            *ngIf="item.solved"
+            class="bi bi-check-circle-fill text-success"
+          ></i>
+        </td>
+        <td>{{ item.doctorName }}</td>
+        <td>{{ item.department }}</td>
+        <td *ngIf="typeofAcc === 'doctor'">
+          <button (click)="deleteItem(item)" class="btn-danger m-1">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

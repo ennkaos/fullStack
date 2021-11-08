@@ -1,0 +1,78 @@
+<div class="row">
+  <h1>Welcome to the Medo Clinic</h1>
+  <sub>Here you can make an appointment</sub>
+</div>
+<div *ngIf="name" class="row mt-5 text-light">
+  <div class="col">
+    <button class="btn-outline btn animation" (click)="changePage('Active')">
+      Active Appointments
+    </button>
+  </div>
+  <div class="col">
+    <button class="btn-outline btn animation" (click)="changePage('History')">
+      Appointments History
+    </button>
+  </div>
+  <div class="col">
+    <button class="btn-outline btn animation" (click)="changePage('Add')">
+      Add Appointment
+    </button>
+  </div>
+  <div class="col">
+    <button class="btn-outline btn animation" (click)="changePage('Update')">
+      Update Appointments
+    </button>
+  </div>
+</div>
+<hr />
+
+<div class="row d-flex justify-content-center" *ngIf="page === 'Active'">
+  <div *ngIf="appointments">
+    <app-list-appuntamento
+      [appuntamenti]="this.activeAppointments"
+    ></app-list-appuntamento>
+  </div>
+  <div *ngIf="!appointments" class="spinner-border" role="status">
+    <span class="sr-only"></span>
+  </div>
+  <div *ngIf="!name">
+    <p>Please Login or Register</p>
+  </div>
+</div>
+<div class="row d-flex justify-content-center" *ngIf="page === 'History'">
+  <div *ngIf="appointments">
+    <app-list-appuntamento
+      [appuntamenti]="this.historyAppointments"
+    ></app-list-appuntamento>
+  </div>
+  <div *ngIf="!appointments" class="spinner-border" role="status">
+    <span class="sr-only"></span>
+  </div>
+  <div *ngIf="!name">
+    <p>Please Login or Register</p>
+  </div>
+</div>
+<div class="row d-flex justify-content-center" *ngIf="page === 'Add'">
+  <div *ngIf="appointments">
+    <app-create-appuntamento></app-create-appuntamento>
+  </div>
+  <div *ngIf="!appointments" class="spinner-border" role="status">
+    <span class="sr-only"></span>
+  </div>
+  <div *ngIf="!name">
+    <p>Please Login or Register</p>
+  </div>
+</div>
+<div class="row d-flex justify-content-center" *ngIf="page === 'Update'">
+  <div *ngIf="appointments">
+    <app-list-appuntamento></app-list-appuntamento>
+    <app-create-appuntamento></app-create-appuntamento>
+  </div>
+  <div *ngIf="!appointments" class="spinner-border" role="status">
+    <span class="sr-only"></span>
+  </div>
+
+  <div *ngIf="!name">
+    <p>Please Login or Register</p>
+  </div>
+</div>
